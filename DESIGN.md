@@ -19,52 +19,34 @@ Heavy dependencies (`recharts`, `tesseract.js`) are lazy-loaded so the main bund
 
 ## Color Palette
 
-### Primary
+The project uses **semantic color tokens** defined in `src/index.css` via TailwindCSS v4 `@theme`. Legacy hue aliases (`teal-*`, `cyan-*`, `slate-*`) remain in the theme as aliases so third-party snippets or historical components keep working, but **new code should use semantic tokens**.
 
-| Token | Value | Usage |
+### Semantic Tokens
+
+| Scale | Meaning | Key Values |
 |---|---|---|
-| `--color-teal-500` | `#14b8a6` | Primary buttons, active states, chart stroke |
-| `--color-teal-600` | `#0d9488` | Hover states, emphasis |
-| `--color-cyan-500` | `#06b6d4` | Gradient partner, secondary accents |
-| `--color-cyan-600` | `#0891b2` | Gradient end, emphasis |
+| `primary-*` | Brand / primary action | `primary-50` light tint, `primary-500` buttons, `primary-600` active states, `primary-700` hover, `primary-800` active |
+| `accent-*` | Secondary / information | `accent-50` tint, `accent-500` info highlights, `accent-600` emphasis |
+| `neutral-*` | Grayscale surfaces and text | `neutral-50` page bg, `neutral-200` borders, `neutral-500` secondary text, `neutral-700` body, `neutral-800` headings |
+| `success-*` | Positive / completion | `success-50` bg, `success-200` border, `success-700` text, `success-800` value |
+| `error-*` | Error / destructive / recording | `error-50` bg, `error-100` recording mic, `error-200` border, `error-600` recording mic, `error-700` text |
+| `warning-*` | Demo / caution badge | `warning-100` bg, `warning-200` border, `warning-700` text |
 
-### Neutrals
+### Legacy Aliases (Backward Compatible)
 
-| Token | Value | Usage |
-|---|---|---|
-| `--color-slate-50` | `#f8fafc` | Page backgrounds, input backgrounds |
-| `--color-slate-100` | `#f1f5f9` | Borders, dividers, hover backgrounds |
-| `--color-slate-200` | `#e2e8f0` | Stronger borders, disabled states |
-| `--color-slate-400` | `#94a3b8` | Placeholder text, secondary labels |
-| `--color-slate-500` | `#64748b` | Body text, descriptions |
-| `--color-slate-600` | `#475569` | Primary body text |
-| `--color-slate-700` | `#334155` | Headings, strong text |
-| `--color-slate-800` | `#1e293b` | Page titles |
-| `--color-slate-900` | `#0f172a` | Top-level headings |
-
-### Semantic
-
-| Token | Value | Usage |
-|---|---|---|
-| `--color-amber-100` | `#fef3c7` | Demo data badge background |
-| `--color-amber-200` | `#fde68a` | Demo data badge border |
-| `--color-amber-700` | `#b45309` | Demo data badge text |
-| `--color-green-50` | `#f0fdf4` | Success card background |
-| `--color-green-200` | `#bbf7d0` | Success card border |
-| `--color-green-700` | `#15803d` | Success card text |
-| `--color-green-800` | `#166534` | Success card value |
-| `--color-red-50` | `#fef2f2` | Error background |
-| `--color-red-100` | `#fee2e2` | Recording mic background |
-| `--color-red-200` | `#fecaca` | Error border |
-| `--color-red-600` | `#dc2626` | Recording mic, hover text |
-| `--color-red-700` | `#b91c1c` | Error text |
+| Alias | Maps to |
+|---|---|
+| `teal-*` | `primary-*` |
+| `cyan-*` | `accent-*` |
+| `slate-*` | `neutral-*` |
 
 ### Usage Patterns
 
-- **Primary actions**: solid `teal-600` with `hover:bg-teal-700` / `active:bg-teal-800`. Used for primary buttons, active sidebar item, user chat bubble, and key headers.
-- **Signature gradient**: `from-teal-500 to-cyan-600` is intentionally reserved for the assistant avatar / digital human, making the AI presence distinctive without overusing gradients across the UI.
-- **Surfaces**: white cards and sidebars on a solid `slate-50` background. Header and sidebars use solid white with `slate-200` borders instead of frosted glass.
-- **Borders**: `slate-200` for neutral cards and app chrome; `teal-100`/`teal-200` for assistant chat bubbles and policy cards as brand accents.
+- **Primary actions**: solid `primary-600` with `hover:bg-primary-700` / `active:bg-primary-800`. Used for primary buttons, active sidebar item, user chat bubble, and key headers.
+- **Signature gradient**: `from-primary-500 to-accent-600` is intentionally reserved for the assistant avatar / digital human, making the AI presence distinctive without overusing gradients across the UI.
+- **Surfaces**: white cards and sidebars on a solid `neutral-50` background. Header and sidebars use solid white with `neutral-200` borders instead of frosted glass.
+- **Borders**: `neutral-200` for neutral cards and app chrome; `primary-100`/`primary-200` for assistant chat bubbles and policy cards as brand accents.
+- **Status**: `success-*` for completed/successful states, `error-*` for errors and the recording mic, `warning-*` for demo-data badges.
 
 ---
 
@@ -80,11 +62,11 @@ font-family: "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont
 
 | Element | Size | Weight | Color | Notes |
 |---|---|---|---|---|
-| Page title | `text-2xl` / 1.5rem | `font-bold` | `slate-800` | e.g. "个人账户看板" |
-| Section heading | `text-lg` / 1.125rem | `font-bold` | `slate-900` | Header app title |
-| Card title | `font-semibold` | 600 | `slate-800` | Inside cards and forms |
-| Body | `text-sm` / 0.875rem | 400 | `slate-700` | Chat bubbles, form content |
-| Caption / meta | `text-xs` / 0.75rem | 400 | `slate-500` | Descriptions, metadata |
+| Page title | `text-2xl` / 1.5rem | `font-bold` | `neutral-800` | e.g. "个人账户看板" |
+| Section heading | `text-lg` / 1.125rem | `font-bold` | `neutral-900` | Header app title |
+| Card title | `font-semibold` | 600 | `neutral-800` | Inside cards and forms |
+| Body | `text-sm` / 0.875rem | 400 | `neutral-700` | Chat bubbles, form content |
+| Caption / meta | `text-xs` / 0.75rem | 400 | `neutral-500` | Descriptions, metadata |
 | Tiny | `text-[10px]` / 0.625rem | 500 | varies | Tags, hints, trend labels |
 
 ### Line Length
@@ -110,7 +92,7 @@ font-family: "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont
 ```
 
 - **Sidebar**: `w-20` on small screens, `lg:w-64` on desktop. Icon-only on small screens, icon + label on desktop.
-- **Header**: `px-6 py-4`, frosted glass, bottom border `teal-100`.
+- **Header**: `px-6 py-4`, solid white background, bottom border `primary-100`.
 - **Main**: `flex-1 flex flex-col min-w-0 overflow-hidden`.
 
 ### Page Padding
@@ -134,29 +116,29 @@ font-family: "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont
 
 ### Button
 
-- **Primary**: `bg-teal-600 text-white rounded-full` with `hover:bg-teal-700 hover:shadow-md active:bg-teal-800`. Solid color conveys authority and reduces generic gradient overuse.
-- **Secondary / Ghost**: `text-slate-500 hover:bg-teal-50 hover:text-teal-700 active:bg-teal-100` on `rounded-xl` or `rounded-lg`.
-- **Active sidebar item**: solid `bg-teal-600` + white text + shadow.
+- **Primary**: `bg-primary-600 text-white rounded-full` with `hover:bg-primary-700 hover:shadow-md active:bg-primary-800`. Solid color conveys authority and reduces generic gradient overuse.
+- **Secondary / Ghost**: `text-neutral-500 hover:bg-primary-50 hover:text-primary-700 active:bg-primary-100` on `rounded-xl` or `rounded-lg`.
+- **Active sidebar item**: solid `bg-primary-600` + white text + shadow.
 - **Disabled**: `disabled:opacity-40 disabled:cursor-not-allowed`.
 
 ### Card
 
-- **Neutral card**: `bg-white rounded-2xl border border-slate-200 p-5 shadow-sm`.
-- **Tinted card**: `bg-gradient-to-r from-teal-50 to-cyan-50 border border-teal-200` (PolicyCard).
-- **Success card**: `bg-green-50 border border-green-200 rounded-xl`.
+- **Neutral card**: `bg-white rounded-2xl border border-neutral-200 p-5 shadow-sm`.
+- **Tinted card**: `bg-gradient-to-r from-primary-50 to-accent-50 border border-primary-200` (PolicyCard).
+- **Success card**: `bg-success-50 border border-success-200 rounded-xl`.
 - **Overview panel**: single `bg-white` card with internal grid and subtle right-border separators (AccountDashboard), avoiding the hero-metric card grid cliché.
 
 ### Input / Textarea
 
-- Chat textarea wrapper: `bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2`.
-- Focus state: `focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-teal-100`.
-- Placeholder: `text-slate-400`.
+- Chat textarea wrapper: `bg-neutral-50 border border-neutral-200 rounded-2xl px-4 py-2`.
+- Focus state: `focus-within:border-primary-400 focus-within:ring-2 focus-within:ring-primary-100`.
+- Placeholder: `text-neutral-400`.
 
 ### Chat Bubble
 
 - **User**: gradient fill, white text, `rounded-tr-none`.
-- **Assistant**: white fill, `slate-700` text, `border border-teal-100`, `rounded-tl-none`.
-- **Avatar**: `w-9 h-9 rounded-full`; user uses `bg-slate-200`, assistant uses signature gradient.
+- **Assistant**: white fill, `neutral-700` text, `border border-primary-100`, `rounded-tl-none`.
+- **Avatar**: `w-9 h-9 rounded-full`; user uses `bg-neutral-200`, assistant uses signature gradient.
 
 ### PolicyCard
 
@@ -190,7 +172,7 @@ font-family: "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont
 
 ### Reduced Motion
 
-Currently no explicit `prefers-reduced-motion` handling. This should be added for accessibility compliance.
+`@media (prefers-reduced-motion: reduce)` is globally applied in `src/index.css` to disable `animation`, `transition`, and `scroll-behavior` for users who prefer reduced motion. Framer Motion animations still run, but CSS transitions and the digital-human ring waves are suppressed.
 
 ---
 

@@ -124,7 +124,7 @@ npx tsx scripts/test-api-search.ts  # 调 /api/search 端点
 
 - **模块类型**：`"type": "module"`，统一使用 ESM。
 - **语言**：TypeScript，严格模式。
-- **样式**：TailwindCSS v4，主色为医保蓝绿色系。
+- **样式**：TailwindCSS v4，使用语义化色板（`primary` / `accent` / `neutral` / `success` / `error` / `warning`），详见 [`DESIGN.md`](DESIGN.md)。新增组件请优先使用语义 token，避免直接引入 `teal-*` / `cyan-*` / `slate-*` 等别名。
 - **代码风格**：遵循项目 `.prettierrc` 与 `eslint.config.js`。
 - **最小改动**：修复 bug / 添加功能时尽量只改必要文件，保持现有接口稳定。
 - **测试优先**：修改 RAG 相关代码后，务必运行 `npm run build-kb`、`scripts/test-search.ts`、`scripts/test-api-search.ts`。
@@ -168,6 +168,7 @@ VITE_DEEPSEEK_API_URL=https://api.deepseek.com/v1/chat/completions
 - [x] **界面反模式清理** — 已移除 dashboard hero-metric 四宫格、 eyebrow 标签、过度渐变装饰，主色改为 solid teal-600
 - [x] **空状态与错误恢复** — 已补充报销记录/附近机构空状态、OCR 识别失败重试
 - [x] **Bundle 体积优化** — `AccountDashboard`/`InvoiceUploader`/`NearbyPage` 懒加载，`tesseract.js` 动态引入，主包从 718 KB 降至 350 KB
+- [x] **语义化颜色 token 体系** — `src/index.css` 增加 `primary` / `accent` / `neutral` / `success` / `error` / `warning` 六级色阶，组件类名统一迁移到语义 token；保留 `teal/cyan/slate` 作为向后兼容别名
 - [ ] **接入真实 LLM API 并替换 RAG 离线兜底** — 已有 DeepSeek 接入，需优化 fallback 策略与错误处理
 - [ ] **录制 Demo 演示视频 / 准备答辩 PPT**
 
@@ -201,3 +202,4 @@ VITE_DEEPSEEK_API_URL=https://api.deepseek.com/v1/chat/completions
 > 变更记录：
 > - 2026-06-19 重构 `AGENTS.md` 结构；新增 `PRODUCT.md`、`DESIGN.md`；优化聊天页移动端体验、焦点可见性、动效无障碍与文本对比度；修复 ESLint 严格模式下的状态同步问题。
 > - 2026-06-19 完成 `impeccable audit + polish`：skip link、触控目标、空状态、active 状态、调色板专业化；主包 code-splitting 后体积减半；开发服务器已启动在 `http://localhost:5200`。
+> - 2026-06-19 完成语义化颜色 token 迁移：`DESIGN.md` / `AGENTS.md` 同步更新，lint 与 build 通过，代码推送至 GitHub。

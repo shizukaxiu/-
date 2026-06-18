@@ -58,8 +58,8 @@ export default function InvoiceUploader() {
       </div>
       <div className="max-w-3xl mx-auto w-full space-y-6">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-slate-800">发票报销助手</h2>
-          <p className="text-sm text-slate-500 mt-1">上传门诊/住院发票，自动识别费用并估算报销金额</p>
+          <h2 className="text-2xl font-bold text-neutral-800">发票报销助手</h2>
+          <p className="text-sm text-neutral-500 mt-1">上传门诊/住院发票，自动识别费用并估算报销金额</p>
         </div>
 
         {!preview ? (
@@ -80,10 +80,10 @@ export default function InvoiceUploader() {
                 inputRef.current?.click()
               }
             }}
-            className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:border-teal-400 ${
+            className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:border-primary-400 ${
               dragOver
-                ? 'border-teal-500 bg-teal-50'
-                : 'border-slate-300 bg-white hover:border-teal-400 hover:bg-slate-50 active:bg-slate-100'
+                ? 'border-primary-500 bg-primary-50'
+                : 'border-neutral-300 bg-white hover:border-primary-400 hover:bg-neutral-50 active:bg-neutral-100'
             }`}
           >
             <input
@@ -93,13 +93,13 @@ export default function InvoiceUploader() {
               onChange={onChange}
               className="hidden"
             />
-            <Upload className="w-12 h-12 mx-auto text-slate-500 mb-3" />
-            <p className="text-sm font-medium text-slate-700">点击或拖拽上传发票图片</p>
-            <p className="text-xs text-slate-500 mt-1">支持 JPG、PNG 格式，点击或按 Enter 选择文件</p>
+            <Upload className="w-12 h-12 mx-auto text-neutral-500 mb-3" />
+            <p className="text-sm font-medium text-neutral-700">点击或拖拽上传发票图片</p>
+            <p className="text-xs text-neutral-500 mt-1">支持 JPG、PNG 格式，点击或按 Enter 选择文件</p>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-            <div className="relative aspect-video bg-slate-100">
+          <div className="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-sm">
+            <div className="relative aspect-video bg-neutral-100">
               <img src={preview} alt="发票预览" className="w-full h-full object-contain" />
               {isRecognizing && (
                 <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white">
@@ -113,7 +113,7 @@ export default function InvoiceUploader() {
               <button
                 onClick={handleReset}
                 aria-label="重新上传发票图片"
-                className="flex items-center gap-1 text-xs text-slate-500 hover:text-teal-600 focus-visible:ring-2 focus-visible:ring-teal-400 rounded"
+                className="flex items-center gap-1 text-xs text-neutral-500 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-400 rounded"
               >
                 <RefreshCw className="w-3 h-3" /> 重新上传
               </button>
@@ -122,11 +122,11 @@ export default function InvoiceUploader() {
         )}
 
         {error && (
-          <div role="alert" className="p-4 bg-red-50 text-red-700 rounded-xl text-sm border border-red-200 flex items-start justify-between gap-4">
+          <div role="alert" className="p-4 bg-error-50 text-error-700 rounded-xl text-sm border border-error-200 flex items-start justify-between gap-4">
             <span>{error}</span>
             <button
               onClick={handleRetry}
-              className="flex-shrink-0 text-xs px-3 py-1.5 rounded-lg bg-red-100 hover:bg-red-200 text-red-700 focus-visible:ring-2 focus-visible:ring-red-400"
+              className="flex-shrink-0 text-xs px-3 py-1.5 rounded-lg bg-error-100 hover:bg-error-200 text-error-700 focus-visible:ring-2 focus-visible:ring-error-400"
             >
               重试
             </button>
@@ -139,53 +139,53 @@ export default function InvoiceUploader() {
             animate={{ opacity: 1, y: 0 }}
             role="region"
             aria-label="发票识别结果"
-            className="bg-white rounded-2xl border border-teal-100 shadow-sm overflow-hidden"
+            className="bg-white rounded-2xl border border-primary-100 shadow-sm overflow-hidden"
           >
-            <div className="bg-teal-600 px-5 py-3 text-white flex items-center gap-2">
+            <div className="bg-primary-600 px-5 py-3 text-white flex items-center gap-2">
               <FileCheck className="w-5 h-5" />
               <span className="font-semibold">识别结果</span>
             </div>
             <div className="p-5 space-y-4">
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <p className="text-slate-500 text-xs">就诊医院</p>
-                  <p className="font-medium text-slate-800">{invoice.hospital}</p>
+                  <p className="text-neutral-500 text-xs">就诊医院</p>
+                  <p className="font-medium text-neutral-800">{invoice.hospital}</p>
                 </div>
                 <div>
-                  <p className="text-slate-500 text-xs">发票日期</p>
-                  <p className="font-medium text-slate-800">{invoice.date}</p>
+                  <p className="text-neutral-500 text-xs">发票日期</p>
+                  <p className="font-medium text-neutral-800">{invoice.date}</p>
                 </div>
                 <div>
-                  <p className="text-slate-500 text-xs">发票编号</p>
-                  <p className="font-medium text-slate-800">{invoice.invoiceNo}</p>
+                  <p className="text-neutral-500 text-xs">发票编号</p>
+                  <p className="font-medium text-neutral-800">{invoice.invoiceNo}</p>
                 </div>
                 <div>
-                  <p className="text-slate-500 text-xs">总金额</p>
-                  <p className="font-medium text-slate-800">{formatCurrency(invoice.total)}</p>
+                  <p className="text-neutral-500 text-xs">总金额</p>
+                  <p className="font-medium text-neutral-800">{formatCurrency(invoice.total)}</p>
                 </div>
               </div>
 
               <div>
-                <p className="text-slate-500 text-xs mb-2">费用明细</p>
-                <div className="divide-y divide-slate-100 border border-slate-100 rounded-xl overflow-hidden">
+                <p className="text-neutral-500 text-xs mb-2">费用明细</p>
+                <div className="divide-y divide-neutral-100 border border-neutral-100 rounded-xl overflow-hidden">
                   {invoice.items.map((item, idx) => (
                     <div key={idx} className="flex justify-between px-4 py-2 text-sm">
-                      <span className="text-slate-700">{item.name}</span>
-                      <span className="text-slate-500">{item.category}</span>
-                      <span className="font-medium text-slate-800">{formatCurrency(item.amount)}</span>
+                      <span className="text-neutral-700">{item.name}</span>
+                      <span className="text-neutral-500">{item.category}</span>
+                      <span className="font-medium text-neutral-800">{formatCurrency(item.amount)}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4 flex items-center justify-between">
+              <div className="bg-gradient-to-r from-success-50 to-success-50 border border-success-200 rounded-xl p-4 flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-green-700">预估可报销金额</p>
-                  <p className="text-xl font-bold text-green-800">
+                  <p className="text-xs text-success-700">预估可报销金额</p>
+                  <p className="text-xl font-bold text-success-800">
                     {formatCurrency(invoice.estimatedReimbursement)}
                   </p>
                 </div>
-                <div className="text-right text-xs text-green-700">
+                <div className="text-right text-xs text-success-700">
                   <p>报销比例约</p>
                   <p className="font-bold">70%</p>
                 </div>

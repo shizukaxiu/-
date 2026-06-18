@@ -152,17 +152,17 @@ export function ChatPage() {
               animate={{ opacity: 1 }}
               className="flex gap-3"
             >
-              <div aria-hidden="true" className="w-9 h-9 rounded-full bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center text-white">
+              <div aria-hidden="true" className="w-9 h-9 rounded-full bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center text-white">
                 <span className="text-xs">AI</span>
               </div>
-              <div className="bg-white border border-teal-100 rounded-2xl rounded-tl-none px-4 py-3 flex items-center gap-1">
+              <div className="bg-white border border-primary-100 rounded-2xl rounded-tl-none px-4 py-3 flex items-center gap-1">
                 {prefersReducedMotion ? (
-                  <span className="text-sm text-slate-500">正在思考中…</span>
+                  <span className="text-sm text-neutral-500">正在思考中…</span>
                 ) : (
                   <>
-                    <span className="w-2 h-2 bg-teal-400 rounded-full animate-bounce" />
-                    <span className="w-2 h-2 bg-teal-400 rounded-full animate-bounce [animation-delay:0.2s]" />
-                    <span className="w-2 h-2 bg-teal-400 rounded-full animate-bounce [animation-delay:0.4s]" />
+                    <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce" />
+                    <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce [animation-delay:0.2s]" />
+                    <span className="w-2 h-2 bg-primary-400 rounded-full animate-bounce [animation-delay:0.4s]" />
                   </>
                 )}
               </div>
@@ -185,17 +185,17 @@ export function ChatPage() {
       </div>
 
       {/* 右侧数字人 */}
-      <div className="hidden lg:flex w-72 flex-shrink-0 border-l border-slate-200 bg-white flex-col items-center justify-center p-6">
+      <div className="hidden lg:flex w-72 flex-shrink-0 border-l border-neutral-200 bg-white flex-col items-center justify-center p-6">
         <DigitalHuman isSpeaking={isTyping || !!currentReply} />
         <div className="mt-8 w-full space-y-3">
-          <p className="text-sm font-medium text-slate-700 text-center">试试这样问</p>
+          <p className="text-sm font-medium text-neutral-700 text-center">试试这样问</p>
           {['异地就医怎么备案？', '医保报销需要哪些材料？', '个人账户余额怎么查询？'].map(
             (q) => (
               <button
                 key={q}
                 onClick={() => handleSend(q)}
                 aria-label={`发送问题：${q}`}
-                className="w-full text-left px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-teal-50 active:bg-teal-100 text-sm text-slate-600 hover:text-teal-700 active:text-teal-800 transition-colors border border-slate-100 focus-visible:ring-2 focus-visible:ring-teal-400 min-h-[44px]"
+                className="w-full text-left px-4 py-2.5 rounded-xl bg-neutral-50 hover:bg-primary-50 active:bg-primary-100 text-sm text-neutral-600 hover:text-primary-700 active:text-primary-800 transition-colors border border-neutral-100 focus-visible:ring-2 focus-visible:ring-primary-400 min-h-[44px]"
               >
                 {q}
               </button>
@@ -237,9 +237,9 @@ function RemoteRecordForm() {
     <motion.div
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="ml-12 max-w-md bg-white border border-teal-200 rounded-2xl p-5 shadow-sm"
+      className="ml-12 max-w-md bg-white border border-primary-200 rounded-2xl p-5 shadow-sm"
     >
-      <h4 className="font-semibold text-slate-800 mb-4">异地就医备案申请表</h4>
+      <h4 className="font-semibold text-neutral-800 mb-4">异地就医备案申请表</h4>
       <div className="space-y-3 text-sm">
         {Object.entries({
           姓名: data.name,
@@ -248,16 +248,16 @@ function RemoteRecordForm() {
           就医地: data.targetCity,
           备案类型: data.recordType,
         }).map(([label, value]) => (
-          <div key={label} className="flex justify-between border-b border-slate-50 pb-2">
-            <span className="text-slate-500">{label}</span>
-            <span className="font-medium text-slate-800">{value}</span>
+          <div key={label} className="flex justify-between border-b border-neutral-50 pb-2">
+            <span className="text-neutral-500">{label}</span>
+            <span className="font-medium text-neutral-800">{value}</span>
           </div>
         ))}
       </div>
       <button
         onClick={handleConfirm}
         aria-label="确认提交异地就医备案申请"
-        className="mt-5 w-full py-3 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 hover:shadow-md transition-all focus-visible:ring-2 focus-visible:ring-teal-400 active:bg-teal-800 active:scale-[0.98] min-h-[48px]"
+        className="mt-5 w-full py-3 rounded-xl bg-primary-600 text-white font-medium hover:bg-primary-700 hover:shadow-md transition-all focus-visible:ring-2 focus-visible:ring-primary-400 active:bg-primary-800 active:scale-[0.98] min-h-[48px]"
       >
         确认提交备案
       </button>
@@ -268,15 +268,15 @@ function QuickQuestions({ onSend }: { onSend: (text: string) => void }) {
   const questions = ['异地就医怎么备案？', '医保报销需要哪些材料？', '个人账户余额怎么查询？']
 
   return (
-    <div className="lg:hidden border-t border-slate-200 bg-white px-4 py-3">
-      <p className="text-xs text-slate-500 mb-2">试试这样问</p>
+    <div className="lg:hidden border-t border-neutral-200 bg-white px-4 py-3">
+      <p className="text-xs text-neutral-500 mb-2">试试这样问</p>
       <div className="flex gap-2 overflow-x-auto pb-1">
         {questions.map((q) => (
           <button
             key={q}
             onClick={() => onSend(q)}
             aria-label={`发送问题：${q}`}
-            className="flex-shrink-0 px-3 py-2 rounded-full bg-slate-50 hover:bg-teal-50 active:bg-teal-100 text-xs text-slate-600 hover:text-teal-700 active:text-teal-800 border border-slate-200 transition-colors focus-visible:ring-2 focus-visible:ring-teal-400 whitespace-nowrap min-h-[44px] flex items-center"
+            className="flex-shrink-0 px-3 py-2 rounded-full bg-neutral-50 hover:bg-primary-50 active:bg-primary-100 text-xs text-neutral-600 hover:text-primary-700 active:text-primary-800 border border-neutral-200 transition-colors focus-visible:ring-2 focus-visible:ring-primary-400 whitespace-nowrap min-h-[44px] flex items-center"
           >
             {q}
           </button>

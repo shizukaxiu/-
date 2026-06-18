@@ -9,7 +9,7 @@ const NearbyPage = lazy(() => import('./NearbyPage'))
 
 function PageLoader() {
   return (
-    <div className="h-full flex items-center justify-center text-slate-500">
+    <div className="h-full flex items-center justify-center text-neutral-500">
       <Loader2 className="w-6 h-6 animate-spin mr-2" />
       <span className="text-sm">加载中…</span>
     </div>

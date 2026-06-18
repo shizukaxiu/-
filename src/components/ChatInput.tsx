@@ -40,15 +40,15 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
   }
 
   return (
-    <div className="border-t border-slate-200 bg-white p-4">
-      <div className="flex items-end gap-2 max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2 focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-teal-100 transition-all">
+    <div className="border-t border-neutral-200 bg-white p-4">
+      <div className="flex items-end gap-2 max-w-4xl mx-auto bg-neutral-50 border border-neutral-200 rounded-2xl px-4 py-2 focus-within:border-primary-400 focus-within:ring-2 focus-within:ring-primary-100 transition-all">
         <button
           onClick={toggleMic}
           disabled={!supported || disabled}
-          className={`p-2.5 rounded-full transition-colors flex-shrink-0 focus-visible:ring-2 focus-visible:ring-teal-400 min-w-[44px] min-h-[44px] flex items-center justify-center ${
+          className={`p-2.5 rounded-full transition-colors flex-shrink-0 focus-visible:ring-2 focus-visible:ring-primary-400 min-w-[44px] min-h-[44px] flex items-center justify-center ${
             isListening
-              ? 'bg-red-100 text-red-600 animate-pulse'
-              : 'text-slate-500 hover:text-teal-600 hover:bg-teal-50 active:bg-teal-100'
+              ? 'bg-error-100 text-error-600 animate-pulse'
+              : 'text-neutral-500 hover:text-primary-600 hover:bg-primary-50 active:bg-primary-100'
           }`}
           title={supported ? '语音输入' : '浏览器不支持语音'}
           aria-label={isListening ? '停止语音输入' : supported ? '语音输入' : '浏览器不支持语音'}
@@ -65,18 +65,18 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
           placeholder={isListening ? '正在听您说...' : '请输入您想咨询的医保问题...'}
           rows={1}
           aria-label="医保问题输入框"
-          className="flex-1 bg-transparent border-none outline-none resize-none py-2 text-sm text-slate-700 placeholder:text-slate-500 max-h-32"
+          className="flex-1 bg-transparent border-none outline-none resize-none py-2 text-sm text-neutral-700 placeholder:text-neutral-500 max-h-32"
         />
         <button
           onClick={handleSend}
           disabled={!text.trim() || disabled}
           aria-label="发送"
-          className="p-2.5 rounded-full bg-teal-600 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-teal-700 hover:shadow-md transition-all flex-shrink-0 focus-visible:ring-2 focus-visible:ring-teal-400 min-w-[44px] min-h-[44px] flex items-center justify-center active:bg-teal-800 active:scale-95"
+          className="p-2.5 rounded-full bg-primary-600 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-primary-700 hover:shadow-md transition-all flex-shrink-0 focus-visible:ring-2 focus-visible:ring-primary-400 min-w-[44px] min-h-[44px] flex items-center justify-center active:bg-primary-800 active:scale-95"
         >
           <Send className="w-5 h-5" />
         </button>
       </div>
-      <p className="text-center text-[10px] text-slate-500 mt-2">
+      <p className="text-center text-[10px] text-neutral-500 mt-2">
         按 Enter 发送，Shift + Enter 换行
       </p>
     </div>

@@ -19,7 +19,7 @@ export function ChatBubble({ message }: ChatBubbleProps) {
       <div
         aria-label={isUser ? '我' : '医保小助手'}
         className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${
-          isUser ? 'bg-slate-200 text-slate-600' : 'bg-gradient-to-br from-teal-500 to-cyan-600 text-white'
+          isUser ? 'bg-neutral-200 text-neutral-600' : 'bg-gradient-to-br from-primary-500 to-accent-600 text-white'
         }`}
       >
         {isUser ? <User className="w-5 h-5" aria-hidden /> : <Bot className="w-5 h-5" aria-hidden />}
@@ -28,8 +28,8 @@ export function ChatBubble({ message }: ChatBubbleProps) {
         <div
           className={`px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-sm ${
             isUser
-              ? 'bg-teal-600 text-white rounded-tr-none'
-              : 'bg-white text-slate-700 border border-teal-100 rounded-tl-none'
+              ? 'bg-primary-600 text-white rounded-tr-none'
+              : 'bg-white text-neutral-700 border border-primary-100 rounded-tl-none'
           }`}
         >
           {message.content}
@@ -53,9 +53,9 @@ interface SuccessCardProps {
 
 function SuccessCard({ meta }: SuccessCardProps) {
   return (
-    <div role="status" className="mt-2 p-3 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800">
+    <div role="status" className="mt-2 p-3 bg-success-50 border border-success-200 rounded-xl text-sm text-success-800">
       <p className="font-semibold">✅ {meta.title}</p>
-      <p className="text-xs mt-1 text-green-700">{meta.detail}</p>
+      <p className="text-xs mt-1 text-success-700">{meta.detail}</p>
     </div>
   )
 }

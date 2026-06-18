@@ -1,22 +1,100 @@
 @import "tailwindcss";
 
 @theme {
-  --color-teal-50: #f0fdfa;
-  --color-teal-100: #ccfbf1;
-  --color-teal-200: #99f6e4;
-  --color-teal-300: #5eead4;
-  --color-teal-400: #2dd4bf;
-  --color-teal-500: #14b8a6;
-  --color-teal-600: #0d9488;
-  --color-teal-700: #0f766e;
-  --color-teal-800: #115e59;
-  --color-cyan-50: #ecfeff;
-  --color-cyan-100: #cffafe;
-  --color-cyan-200: #a5f3fc;
-  --color-cyan-300: #67e8f9;
-  --color-cyan-400: #22d3ee;
-  --color-cyan-500: #06b6d4;
-  --color-cyan-600: #0891b2;
+  /* Brand / Primary */
+  --color-primary-50: #f0fdfa;
+  --color-primary-100: #ccfbf1;
+  --color-primary-200: #99f6e4;
+  --color-primary-300: #5eead4;
+  --color-primary-400: #2dd4bf;
+  --color-primary-500: #14b8a6;
+  --color-primary-600: #0d9488;
+  --color-primary-700: #0f766e;
+  --color-primary-800: #115e59;
+  --color-primary-900: #134e4a;
+
+  /* Brand accent */
+  --color-accent-50: #ecfeff;
+  --color-accent-100: #cffafe;
+  --color-accent-200: #a5f3fc;
+  --color-accent-300: #67e8f9;
+  --color-accent-400: #22d3ee;
+  --color-accent-500: #06b6d4;
+  --color-accent-600: #0891b2;
+
+  /* Semantic: Success */
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-200: #bbf7d0;
+  --color-success-300: #86efac;
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+  --color-success-800: #166534;
+
+  /* Semantic: Error */
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-200: #fecaca;
+  --color-error-300: #fca5a5;
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+  --color-error-800: #991b1b;
+
+  /* Semantic: Warning */
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+
+  /* Neutral */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+
+  /* Legacy aliases */
+  --color-teal-50: var(--color-primary-50);
+  --color-teal-100: var(--color-primary-100);
+  --color-teal-200: var(--color-primary-200);
+  --color-teal-300: var(--color-primary-300);
+  --color-teal-400: var(--color-primary-400);
+  --color-teal-500: var(--color-primary-500);
+  --color-teal-600: var(--color-primary-600);
+  --color-teal-700: var(--color-primary-700);
+  --color-teal-800: var(--color-primary-800);
+  --color-teal-900: var(--color-primary-900);
+  --color-cyan-50: var(--color-accent-50);
+  --color-cyan-100: var(--color-accent-100);
+  --color-cyan-200: var(--color-accent-200);
+  --color-cyan-300: var(--color-accent-300);
+  --color-cyan-400: var(--color-accent-400);
+  --color-cyan-500: var(--color-accent-500);
+  --color-cyan-600: var(--color-accent-600);
+  --color-slate-50: var(--color-neutral-50);
+  --color-slate-100: var(--color-neutral-100);
+  --color-slate-200: var(--color-neutral-200);
+  --color-slate-300: var(--color-neutral-300);
+  --color-slate-400: var(--color-neutral-400);
+  --color-slate-500: var(--color-neutral-500);
+  --color-slate-600: var(--color-neutral-600);
+  --color-slate-700: var(--color-neutral-700);
+  --color-slate-800: var(--color-neutral-800);
+  --color-slate-900: var(--color-neutral-900);
 }
 
 html,
@@ -44,12 +122,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--color-neutral-300);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--color-neutral-400);
 }
 
 /* 动画 */
@@ -77,6 +155,6 @@ body {
 
 /* 聚焦可见性 */
 :focus-visible {
-  outline: 2px solid #0d9488;
+  outline: 2px solid var(--color-primary-600);
   outline-offset: 2px;
 }
