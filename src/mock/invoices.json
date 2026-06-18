@@ -1,0 +1,12 @@
+{
+  "invoiceNo": "0012345678",
+  "hospital": "北京朝阳医院",
+  "date": "2026-06-10",
+  "items": [
+    { "name": "血常规检查", "amount": 120.0, "category": "检查费" },
+    { "name": "头孢克肟胶囊", "amount": 85.5, "category": "药品费" },
+    { "name": "挂号费", "amount": 50.0, "category": "诊察费" }
+  ],
+  "total": 255.5,
+  "estimatedReimbursement": 178.85
+}
