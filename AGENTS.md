@@ -29,7 +29,10 @@
 ## 常用命令
 
 ```bash
-# 安装并启动（默认端口 5200）
+# Windows 一键启动（自动检查依赖并启动）
+./start.bat
+
+# 或手动安装并启动（默认端口 5200）
 npm install
 npm run dev
 

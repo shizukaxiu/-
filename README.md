@@ -208,7 +208,19 @@ npm install
 ```
 
 ### 启动开发服务器
+
+#### 方式一：一键启动脚本（推荐）
+Windows 环境下直接双击项目根目录的：
+
+```
+start.bat
+```
+
+脚本会自动检查 `node_modules`，不存在则先执行 `npm install`，然后启动开发服务器。
+
+#### 方式二：命令行
 ```bash
+npm install
 npm run dev
 ```
 
