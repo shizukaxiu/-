@@ -1,32 +1,32 @@
 {
   "name": "张三",
-  "idCard": "110101********1234",
-  "insuredCity": "北京市",
+  "idCard": "320102********1234",
+  "insuredCity": "南京市",
   "insuranceType": "城镇职工医保",
   "balance": 2840.5,
   "thisYearSpent": 3420.0,
   "reimbursementRecords": [
     {
       "date": "2026-05-20",
-      "hospital": "北京协和医院",
+      "hospital": "南京市鼓楼医院",
       "amount": 580.0,
       "reimbursed": 420.0
     },
     {
       "date": "2026-04-12",
-      "hospital": "北京朝阳医院",
+      "hospital": "江苏省人民医院",
       "amount": 320.0,
       "reimbursed": 210.0
     },
     {
       "date": "2026-03-08",
-      "hospital": "北京大学第一医院",
+      "hospital": "南京市第一医院",
       "amount": 450.0,
       "reimbursed": 315.0
     },
     {
       "date": "2026-01-15",
-      "hospital": "社区卫生院",
+      "hospital": "玄武区社区卫生服务中心",
       "amount": 120.0,
       "reimbursed": 96.0
     }

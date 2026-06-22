@@ -1,6 +1,6 @@
 {
   "invoiceNo": "0012345678",
-  "hospital": "北京朝阳医院",
+  "hospital": "南京市鼓楼医院",
   "date": "2026-06-10",
   "items": [
     { "name": "血常规检查", "amount": 120.0, "category": "检查费" },
