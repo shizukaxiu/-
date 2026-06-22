@@ -18,9 +18,11 @@
 
 **当前重点能力**
 
+- 登录与角色分流（普通用户 / 系统管理员）
 - 医保政策智能问答（本地 TF-IDF RAG，离线可用）
 - 语音输入、OCR 发票识别、数字人动画
 - 异地就医备案、账户看板、附近定点机构等业务 Demo
+- 管理员后台：查看已入库文件、上传 PDF/DOC、触发知识库重建
 
 ---
 
@@ -63,6 +65,13 @@ npx tsx scripts/test-api-search.ts  # 调 /api/search 端点
    - 同时写入 `src/kb/nanjing-kb.lance`（LanceDB）和 `src/kb/nanjing-kb-index.json`（JSON）
 3. **重启 `npm run dev`**：Vite 的 `/api/search` 中间件会缓存 JSON 索引。
 
+#### 方式二：通过管理员后台（运行时）
+
+1. 使用账号 `222` / 密码 `222` 登录系统。
+2. 进入"系统管理后台"，上传新的 PDF / DOC / DOCX / TXT / MD 文件。
+3. 点击"开始重建"，等待进度到达 100%。
+4. 重建成功后，Vite 开发服务器会自动使 JSON 索引缓存失效，新内容立即可被检索。
+
 ### 运行时链路
 
 ```
@@ -96,7 +105,12 @@ npx tsx scripts/test-api-search.ts  # 调 /api/search 端点
 | `src/services/rag.ts` | `searchPolicies(query)`：优先向量检索，失败降级关键词匹配 |
 | `src/services/llm.ts` | DeepSeek LLM 调用 + system prompt |
 | `src/types/kb.ts` | `DocumentChunk`、`SearchIndex`、`SearchResult` 等类型 |
-| `vite.config.ts` | 开发服务器 `/api/search` POST 端点，默认阈值 `0.02` |
+| `vite.config.ts` | 开发服务器 `/api/search` 与 `/api/admin/*` 端点 |
+| `src/services/kbBuilder.ts` | 可复用的知识库扫描/解析/切片/向量化/保存服务 |
+| `src/services/adminApi.ts` | 管理员后台前端 API 封装 |
+| `src/store/authStore.ts` | 登录状态与角色（Zustand + persist） |
+| `src/pages/LoginPage.tsx` | 登录页 |
+| `src/pages/AdminPage.tsx` | 系统管理员后台 |
 | `src/components/PolicyCard.tsx` | 检索结果来源卡片 |
 
 ---
@@ -113,9 +127,9 @@ npx tsx scripts/test-api-search.ts  # 调 /api/search 端点
 
 ### 生产部署注意
 
-- `/api/search` 仅 Vite 开发服务器提供，**生产构建后不可用**。
+- `/api/search` 与 `/api/admin/*` 仅 Vite 开发服务器提供，**生产构建后不可用**。
 - 生产环境需要：
-  - 单独后端（Node/Express/Fastify）承载 `/api/search`，或
+  - 单独后端（Node/Express/Fastify）承载 `/api/search` 与管理员接口，或
   - 将 JSON 索引作为静态资源部署，并在浏览器直接计算相似度（当前 `searchIndex.ts` 已支持）。
 
 ---
@@ -169,6 +183,7 @@ VITE_DEEPSEEK_API_URL=https://api.deepseek.com/v1/chat/completions
 - [x] **空状态与错误恢复** — 已补充报销记录/附近机构空状态、OCR 识别失败重试
 - [x] **Bundle 体积优化** — `AccountDashboard`/`InvoiceUploader`/`NearbyPage` 懒加载，`tesseract.js` 动态引入，主包从 718 KB 降至 350 KB
 - [x] **语义化颜色 token 体系** — `src/index.css` 增加 `primary` / `accent` / `neutral` / `success` / `error` / `warning` 六级色阶，组件类名统一迁移到语义 token；保留 `teal/cyan/slate` 作为向后兼容别名
+- [x] **登录与管理员后台** — 新增登录页、角色分流、`authStore`、管理员文件上传与知识库重建 UI、`/api/admin/*` 接口
 - [ ] **接入真实 LLM API 并替换 RAG 离线兜底** — 已有 DeepSeek 接入，需优化 fallback 策略与错误处理
 - [ ] **录制 Demo 演示视频 / 准备答辩 PPT**
 
@@ -197,9 +212,10 @@ VITE_DEEPSEEK_API_URL=https://api.deepseek.com/v1/chat/completions
 
 ---
 
-> 最后更新：2026-06-19
+> 最后更新：2026-06-22
 >
 > 变更记录：
+> - 2026-06-22 新增登录页、角色分流与系统管理员后台；支持上传 PDF/DOC 并触发知识库重建；使用 `taste-skill` 设计登录与管理后台 UI；`CHANGELOG.md` / `AGENTS.md` / `README.md` 同步更新，lint 与 build 通过。
 > - 2026-06-19 重构 `AGENTS.md` 结构；新增 `PRODUCT.md`、`DESIGN.md`；优化聊天页移动端体验、焦点可见性、动效无障碍与文本对比度；修复 ESLint 严格模式下的状态同步问题。
 > - 2026-06-19 完成 `impeccable audit + polish`：skip link、触控目标、空状态、active 状态、调色板专业化；主包 code-splitting 后体积减半；开发服务器已启动在 `http://localhost:5200`。
 > - 2026-06-19 完成语义化颜色 token 迁移：`DESIGN.md` / `AGENTS.md` 同步更新，lint 与 build 通过，代码推送至 GitHub。

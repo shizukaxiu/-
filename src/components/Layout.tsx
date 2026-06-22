@@ -1,11 +1,15 @@
 import type { ReactNode } from 'react'
+import { LogOut } from 'lucide-react'
 import { Sidebar } from './Sidebar'
+import { useAuthStore } from '../store/authStore'
 
 interface LayoutProps {
   children: ReactNode
 }
 
 export function Layout({ children }: LayoutProps) {
+  const { user, logout } = useAuthStore()
+
   return (
     <div className="flex h-screen w-full bg-neutral-50 text-neutral-800 overflow-hidden">
       <a
@@ -26,8 +30,20 @@ export function Layout({ children }: LayoutProps) {
               <p className="text-xs text-neutral-600">让老百姓像聊微信一样办医保</p>
             </div>
           </div>
-          <div className="text-xs px-3 py-1 rounded-full bg-warning-100 text-warning-700 border border-warning-200" aria-label="演示数据，均为模拟">
-            Demo 数据均为模拟
+          <div className="flex items-center gap-3">
+            <div className="text-xs px-3 py-1 rounded-full bg-warning-100 text-warning-700 border border-warning-200" aria-label="演示数据，均为模拟">
+              Demo 数据均为模拟
+            </div>
+            {user && (
+              <button
+                onClick={logout}
+                className="flex items-center gap-1.5 text-xs font-medium text-neutral-500 hover:text-error-700 hover:bg-error-50 px-3 py-1.5 rounded-full transition-colors"
+                aria-label="退出登录"
+              >
+                <LogOut className="w-3.5 h-3.5" aria-hidden="true" />
+                <span className="hidden sm:inline">退出</span>
+              </button>
+            )}
           </div>
         </header>
         <div className="flex-1 overflow-hidden">{children}</div>
