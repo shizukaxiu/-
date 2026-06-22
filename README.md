@@ -257,12 +257,21 @@ npm run build-kb
 
 > 默认使用本地 TF-IDF 向量模型，无需联网和 API Key。如需更强的语义向量效果，可配置 OpenAI/智谱等 Embedding API。
 
-### 接入 DeepSeek API（可选）
+### 接入真实 API（可选但推荐）
+
+项目已预留真实 API 配置，填写后重启即可获得更好的体验：
+
+#### DeepSeek（智能对话）
 1. 访问 https://platform.deepseek.com/ 获取 API Key。
 2. 将 `.env` 文件中的 `VITE_DEEPSEEK_API_KEY` 填入你的 Key。
 3. 重新启动开发服务器。
 
-> 若不配置 API Key，系统会自动切换为 **RAG 离线兜底模式**，保证 Demo 稳定可控。
+#### 千问/Qwen-VL（发票图片 OCR 识别）
+1. 访问 https://dashscope.aliyun.com/ 获取 API Key。
+2. 将 `.env` 文件中的 `VITE_QIANWEN_API_KEY` 填入你的 Key。
+3. 重新启动开发服务器。
+
+> 若不配置 API Key，系统会自动切换为 **RAG 离线兜底模式**和**本地 Tesseract OCR**，保证 Demo 稳定可控。
 
 ### 打包构建
 ```bash

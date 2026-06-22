@@ -153,8 +153,12 @@ npx tsx scripts/test-api-search.ts  # 调 /api/search 端点
 参考 [`.env.example`](.env.example)：
 
 ```bash
-VITE_DEEPSEEK_API_KEY=          # 真实大模型调用（可选）
+VITE_DEEPSEEK_API_KEY=          # DeepSeek 真实大模型调用（可选）
 VITE_DEEPSEEK_API_URL=https://api.deepseek.com/v1/chat/completions
+
+VITE_QIANWEN_API_KEY=           # 千问/Qwen-VL 图片 OCR 识别（可选）
+VITE_QIANWEN_API_URL=https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+VITE_QIANWEN_VL_MODEL=qwen-vl-plus
 
 # 可选：用 OpenAI/智谱 Embedding 替换本地 TF-IDF
 # VITE_OPENAI_API_KEY=
@@ -162,7 +166,7 @@ VITE_DEEPSEEK_API_URL=https://api.deepseek.com/v1/chat/completions
 # VITE_EMBEDDING_MODEL=
 ```
 
-未配置 `VITE_DEEPSEEK_API_KEY` 时，当前实现会 fallback 到 RAG 离线结果。
+未配置 `VITE_DEEPSEEK_API_KEY` 时，对话会 fallback 到 RAG 离线结果；未配置 `VITE_QIANWEN_API_KEY` 时，图片识别会 fallback 到本地 Tesseract OCR。
 
 ---
 

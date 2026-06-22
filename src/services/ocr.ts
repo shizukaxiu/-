@@ -1,5 +1,6 @@
 import type { Invoice } from '../types'
 import mockInvoice from '../mock/invoices.json'
+import { isQwenOcrAvailable, recognizeInvoiceWithQwen } from './qwenOcr'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let worker: any | null = null
@@ -12,6 +13,16 @@ export async function initOCRWorker() {
 }
 
 export async function recognizeInvoice(imageUrl: string): Promise<Invoice> {
+  // 优先使用千问/Qwen-VL API 进行图片识别
+  if (isQwenOcrAvailable()) {
+    try {
+      return await recognizeInvoiceWithQwen(imageUrl)
+    } catch (err) {
+      console.warn('千问 OCR 识别失败，降级到本地 Tesseract:', err)
+    }
+  }
+
+  // 本地 Tesseract OCR 兜底
   try {
     const ocrWorker = await initOCRWorker()
     const {
