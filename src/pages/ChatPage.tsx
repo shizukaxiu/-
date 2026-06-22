@@ -39,8 +39,13 @@ export function ChatPage() {
     (text: string): boolean => {
       const lower = text.toLowerCase()
 
-      // 异地备案流程
-      if (/异地|备案|上海|北京|广州|深圳|外省|跨省/.test(lower)) {
+      // 异地备案流程：仅在用户明确表达办理/申请意图时才直接弹表单
+      // 咨询类问题（如"怎么办理""如何备案"）应交给 LLM/RAG 回答
+      const hasRemoteKeyword = /异地|备案|外省|跨省/.test(lower)
+      const hasApplyIntent = /(我要|帮我|给我|申请|办理|备案一下|办一下|报一下).*(异地|备案|外省|跨省)/.test(lower)
+      const isConsultation = /(怎么|如何|怎样|什么|吗\s*$|政策|规定|流程|条件|要求|标准)/.test(lower)
+
+      if (hasRemoteKeyword && hasApplyIntent && !isConsultation) {
         addMessage({
           role: 'assistant',
           content: '我可以帮您办理异地就医备案。已为您预填个人信息，请确认：',
