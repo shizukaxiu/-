@@ -136,9 +136,7 @@ export function LoginPage() {
           </div>
         </div>
 
-        <p className="text-xs text-neutral-400 text-center mt-6">
-          本地演示环境 · 数据均为模拟
-        </p>
+        <p className="text-xs text-neutral-400 text-center mt-6">本地演示环境</p>
       </motion.div>
     </div>
   )

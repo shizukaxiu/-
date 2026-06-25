@@ -31,9 +31,6 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="text-xs px-3 py-1 rounded-full bg-warning-100 text-warning-700 border border-warning-200" aria-label="演示数据，均为模拟">
-              Demo 数据均为模拟
-            </div>
             {user && (
               <button
                 onClick={logout}

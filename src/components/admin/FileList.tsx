@@ -73,12 +73,18 @@ export function FileList({ files }: FileListProps) {
               return (
                 <tr key={file.fileName} className="hover:bg-neutral-50/50 transition-colors">
                   <td className="px-5 py-3.5">
-                    <div className="flex items-center gap-3">
-                      <Icon className="w-4.5 h-4.5 text-neutral-400" aria-hidden="true" />
-                      <span className="text-sm text-neutral-800 font-medium truncate max-w-[200px] sm:max-w-xs">
+                    <a
+                      href={`/api/admin/file/${encodeURIComponent(file.fileName)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 group"
+                      title={`打开 ${file.fileName}`}
+                    >
+                      <Icon className="w-4.5 h-4.5 text-neutral-400 group-hover:text-primary-600 transition-colors" aria-hidden="true" />
+                      <span className="text-sm text-neutral-800 font-medium truncate max-w-[200px] sm:max-w-xs group-hover:text-primary-600 group-hover:underline transition-colors">
                         {file.fileName}
                       </span>
-                    </div>
+                    </a>
                   </td>
                   <td className="px-5 py-3.5">
                     <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-lg border ${badge.className}`}>

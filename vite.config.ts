@@ -149,27 +149,26 @@ export default defineConfig({
             )
 
             const index = await loadIndex().catch(() => null)
-            const sourceCounts: Record<string, number> = {}
-            if (index) {
-              for (const doc of index.documents) {
-                const source = doc.source || '未知来源'
-                sourceCounts[source] = (sourceCounts[source] || 0) + 1
-              }
-            }
 
             const fileInfos = await Promise.all(
               supportedFiles.map(async (fileName) => {
                 const filePath = path.join(RAW_DIR, fileName)
                 const stat = await fs.stat(filePath)
-                const source = fileName
+                const baseName = path.basename(fileName, path.extname(fileName))
+                // 切片 id 格式为 `${baseName}-${idx}`，按前缀匹配更准确
+                const chunkCount =
+                  index?.documents.filter((d) => d.id.startsWith(`${baseName}-`)).length || 0
                 return {
                   fileName,
                   size: stat.size,
                   updatedAt: stat.mtime.toISOString(),
-                  chunkCount: sourceCounts[source] || 0,
+                  chunkCount,
                 }
               })
             )
+
+            // 按更新时间倒序，新上传的文件在最前
+            fileInfos.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
 
             await sendJson(res, {
               files: fileInfos,
@@ -257,6 +256,60 @@ export default defineConfig({
           })()
 
           await sendJson(res, { success: true, status: rebuildStatus.status })
+        })
+
+        // 查看/下载原始文件
+        server.middlewares.use('/api/admin/file', async (req, res) => {
+          if (req.method !== 'GET') {
+            res.statusCode = 405
+            res.end('Method Not Allowed')
+            return
+          }
+
+          try {
+            const url = new URL(req.url || '/', `http://${req.headers.host}`)
+            const rawPath = decodeURIComponent(url.pathname.replace('/api/admin/file/', '') || '')
+            const fileName = path.basename(rawPath)
+            if (!fileName) {
+              await sendJson(res, { error: '缺少文件名' }, 400)
+              return
+            }
+
+            if (!/\.(pdf|docx?|txt|md)$/i.test(fileName)) {
+              await sendJson(res, { error: '不支持的文件格式' }, 400)
+              return
+            }
+
+            const filePath = path.join(RAW_DIR, fileName)
+            await fs.access(filePath)
+            const buffer = await fs.readFile(filePath)
+
+            const ext = path.extname(fileName).toLowerCase()
+            const mimeTypes: Record<string, string> = {
+              '.pdf': 'application/pdf',
+              '.doc': 'application/msword',
+              '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+              '.txt': 'text/plain; charset=utf-8',
+              '.md': 'text/markdown; charset=utf-8',
+            }
+
+            res.statusCode = 200
+            res.setHeader('Content-Type', mimeTypes[ext] || 'application/octet-stream')
+            // filename 只能包含 ASCII，中文通过 filename*=UTF-8'' 编码
+            const asciiName = fileName.replace(/[^\x20-\x7E]/g, '_')
+            res.setHeader(
+              'Content-Disposition',
+              `inline; filename="${asciiName}"; filename*=UTF-8''${encodeURIComponent(fileName)}`
+            )
+            res.end(buffer)
+          } catch (err) {
+            if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+              await sendJson(res, { error: '文件不存在' }, 404)
+              return
+            }
+            console.error('读取文件失败:', err)
+            await sendJson(res, { error: err instanceof Error ? err.message : '读取文件失败' }, 500)
+          }
         })
 
         // 查询重建状态
